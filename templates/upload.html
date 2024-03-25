@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Upload CSV File</title>
+    <style>
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #fff; /* White background */
+        color: #333; /* Black text color */
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #2d3c90; /* Color 1 for headings */
+      }
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid #2d3c90; /* Color 1 border for form */
+        border-radius: 10px;
+        background-color: #f2f2f2; /* Light gray background for form */
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type='file'] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc; /* Gray border for file input */
+        border-radius: 5px;
+      }
+      button[type='submit'] {
+        background-color: #2d3c90; /* Color 1 background for submit button */
+        color: #fff; /* White text color for submit button */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button[type='submit']:hover {
+        background-color: #1f295d; /* Darker Color 1 background on hover */
+      }
+      .instructions {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f9f9f9; /* Light gray background for instructions */
+        border: 1px solid #ccc; /* Gray border for instructions */
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>USIU Lab Schedule Generator</h1>
+
+    <!-- Instructions -->
+    <div class="instructions">
+      <h2>Instructions:</h2>
+      <p>Please upload a CSV file containing the course schedule data.</p>
+      <p>The CSV file should have the following columns:</p>
+      <ul>
+        <li>Start time</li>
+        <li>Days</li>
+        <li>Course code</li>
+        <li>Course section</li>
+        <li>Course name</li>
+        <li>Faculty</li>
+        <li>Capacity</li>
+      </ul>
+      <p>Example:</p>
+      <pre>
+Start time, Days, Course code, Course section, Course name, Faculty, Capacity
+7:00 AM, MW, APT2010, C, SYSTEMS ANALYSIS & DESIGN, "Mwangi, E", 35
+    </pre
+      >
+      <p><strong>Assumptions:</strong></p>
+      <ul>
+        <li>All labs can handle the capacity of all courses.</li>
+        <li>
+          If the classes assigned to a specific time exceed the number of labs
+          available, it will cause an error.
+        </li>
+        <li>No collisions occur in the class schedule provided.</li>
+      </ul>
+    </div>
+    <form
+      action="/"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <label for="file">Choose a CSV file:</label>
+      <input
+        type="file"
+        id="file"
+        name="file"
+        accept=".csv"
+        required
+      />
+      <button type="submit">Upload</button>
+    </form>
+  </body>
+</html>
