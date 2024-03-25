@@ -5,6 +5,7 @@ from io import StringIO
 from flask_weasyprint import HTML, render_pdf
 from constraint import Problem, AllDifferentConstraint
 import json
+from flask import send_file
 
 app = Flask(__name__)
 
@@ -109,6 +110,12 @@ def upload_file():
 def handle_feasibility_error(error):
     error_message = str(error)
     return render_template('error.html', error_message=error_message), 500
+
+
+@app.route('/download-sample-schedule')
+def download_sample_schedule():
+    sample_schedule_path = 'static/sample_schedule.csv'
+    return send_file(sample_schedule_path, as_attachment=True)
 
 
 if __name__ == '__main__':

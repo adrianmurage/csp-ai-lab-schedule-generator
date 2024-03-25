@@ -20,6 +20,36 @@
         margin-bottom: 20px;
         color: #2d3c90; /* Color 1 for headings */
       }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 2px solid #2d3c90; /* Color 1 border for table */
+        margin-bottom: 40px;
+      }
+      th,
+      td {
+        border: 1px solid #2d3c90; /* Color 1 border for table cells */
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #ffcc00; /* Color 2 background for table headers */
+        color: #332900; /* White text color for table headers */
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray background for even rows */
+      }
+      tr:hover {
+        background-color: #e0e0e0; /* Darker gray background for hover effect */
+      }
+
+      /* upload form heading */
+      .upload-form-heading {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 40px;
+      }
       form {
         max-width: 500px;
         margin: 0 auto;
@@ -46,6 +76,7 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        font-size: medium;
       }
       button[type='submit']:hover {
         background-color: #1f295d; /* Darker Color 1 background on hover */
@@ -57,6 +88,21 @@
         background-color: #f9f9f9; /* Light gray background for instructions */
         border: 1px solid #ccc; /* Gray border for instructions */
         border-radius: 5px;
+      }
+      .download-link {
+        margin-top: 20px;
+        /* text-align: center; */
+      }
+      .download-link a {
+        background-color: #2d3c90;
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        display: inline-block;
+      }
+      .download-link a:hover {
+        background-color: #1f295d;
       }
     </style>
   </head>
@@ -78,12 +124,27 @@
         <li>Capacity</li>
       </ul>
       <p>Example:</p>
-      <pre>
-Start time, Days, Course code, Course section, Course name, Faculty, Capacity
-7:00 AM, MW, APT2010, C, SYSTEMS ANALYSIS & DESIGN, "Mwangi, E", 35
-    </pre
-      >
-      <p><strong>Assumptions:</strong></p>
+      <table>
+        <tr>
+          <th>Start time</th>
+          <th>Days</th>
+          <th>Course code</th>
+          <th>Course section</th>
+          <th>Course name</th>
+          <th>Faculty</th>
+          <th>Capacity</th>
+        </tr>
+        <tr>
+          <td>7:00 AM</td>
+          <td>MW</td>
+          <td>APT2010</td>
+          <td>C</td>
+          <td>SYSTEMS ANALYSIS & DESIGN</td>
+          <td>Mwangi, E</td>
+          <td>35</td>
+        </tr>
+      </table>
+      <h3>Assumptions:</h3>
       <ul>
         <li>All labs can handle the capacity of all courses.</li>
         <li>
@@ -92,7 +153,20 @@ Start time, Days, Course code, Course section, Course name, Faculty, Capacity
         </li>
         <li>No collisions occur in the class schedule provided.</li>
       </ul>
+      <h3>Sample Course Schedule:</h3>
+
+      <!-- Download link -->
+      <div class="download-link">
+        <p>Download a sample course schedule CSV file to use as a template.</p>
+        <a
+          href="/download-sample-schedule"
+          download
+          >Download Sample Schedule</a
+        >
+      </div>
     </div>
+
+    <h2 class="upload-form-heading">Upload Course Schedule CSV:</h2>
     <form
       action="/"
       method="post"
@@ -106,7 +180,7 @@ Start time, Days, Course code, Course section, Course name, Faculty, Capacity
         accept=".csv"
         required
       />
-      <button type="submit">Upload</button>
+      <button type="submit">Generate Lab Schedule</button>
     </form>
   </body>
 </html>
