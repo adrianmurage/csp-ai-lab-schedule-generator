@@ -1,11 +1,16 @@
-from flask import Flask, render_template, request
+import pdfkit
+from flask import Flask, render_template, request, send_file
+import csv
+from io import StringIO
+from flask_weasyprint import HTML, render_pdf
 from constraint import Problem, AllDifferentConstraint
 import json
 
-
 app = Flask(__name__)
 
-# Function to solve CSP problem for a group
+
+class FeasibilityError(Exception):
+    pass
 
 
 def solve_csp(group_data, labs):
@@ -26,13 +31,21 @@ def solve_csp(group_data, labs):
 
     return solution
 
-# Function to print lab distribution for each group
+
+def check_feasibility(groups, labs):
+    for group, data in groups.items():
+        if len(data) > len(labs):
+            available_labs = ', '.join(labs)
+            raise FeasibilityError(
+                f"Error: Unable to generate lab schedule for group '{group}'. There are more classes scheduled than available labs ({available_labs}). Consider adding more lab resources or adjusting the schedule.")
 
 
-# Function to print lab distribution for each group
-def print_lab_distribution(grouped_data, labs):
+def generate_lab_distribution(grouped_data, labs):
     master_solutions = []
     for group, data in grouped_data.items():
+        # Check feasibility before attempting to create the schedule
+        check_feasibility({group: data}, labs)
+
         # Extract class names for the group
         class_names = [
             f"{class_data[2]}_{class_data[3]}" for class_data in data]
@@ -48,11 +61,8 @@ def print_lab_distribution(grouped_data, labs):
                 class_data = next(
                     cd for cd in data if f"{cd[2]}_{cd[3]}" == class_name)
                 course_name = class_data[4]  # Course name
-                # Print the faculty names for debugging
-                print("Raw faculty name:", class_data[5].strip('"'))
                 # Fix faculty name by splitting and formatting
                 faculty = ", ".join(class_data[5].strip('"').split(', '))
-                print("Formatted faculty name:", faculty)
                 # Include all values
                 solutions.append((class_name, lab, course_name, faculty))
         else:
@@ -88,14 +98,17 @@ def upload_file():
             # Solve CSP and print lab distribution
             labs = ['LAB1', 'LAB2', 'LAB3', 'LAB4',
                     'LAB7', 'GLAB', 'HLAB', 'SLAB']
-            schedule = print_lab_distribution(grouped_data, labs)
-
-            # Convert schedule to JSON string
-            schedule_json = json.dumps(schedule)
+            schedule = generate_lab_distribution(grouped_data, labs)
 
             # Render lab schedule HTML with schedule_json
             return render_template('schedule.html', schedule=schedule)
     return render_template('upload.html')
+
+
+@app.errorhandler(FeasibilityError)
+def handle_feasibility_error(error):
+    error_message = str(error)
+    return render_template('error.html', error_message=error_message), 500
 
 
 if __name__ == '__main__':
