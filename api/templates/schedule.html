@@ -71,9 +71,35 @@
       .print-button:hover {
         background-color: #1f295d; /* Darker Color 1 background on hover */
       }
+
+      .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        text-decoration: none;
+      }
+      .back-button button {
+        background-color: #205081; /* Brand's secondary color */
+        color: #fff; /* White text color */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+      .back-button button:hover {
+        background-color: #1b466a; /* Darker shade on hover */
+      }
     </style>
   </head>
   <body>
+    <a
+      href="/"
+      class="back-button"
+    >
+      <button>Go Back</button>
+    </a>
     <h1>Lab Schedule</h1>
 
     <!-- Print button -->
