@@ -15,41 +15,75 @@
         background-color: #fff; /* White background */
         color: #333; /* Black text color */
       }
+
       h1 {
         text-align: center;
         margin-bottom: 20px;
         color: #2d3c90; /* Color 1 for headings */
       }
+
       h2 {
         margin-top: 40px;
         color: #2d3c90; /* Color 1 for subheadings */
       }
+
       table {
         width: 100%;
         border-collapse: collapse;
         border: 2px solid #2d3c90; /* Color 1 border for table */
         margin-bottom: 40px;
       }
+
       th,
       td {
         border: 1px solid #2d3c90; /* Color 1 border for table cells */
         padding: 8px;
         text-align: left;
       }
+
       th {
         background-color: #ffcc00; /* Color 2 background for table headers */
         color: #332900; /* White text color for table headers */
       }
+
       tr:nth-child(even) {
         background-color: #f2f2f2; /* Light gray background for even rows */
       }
+
       tr:hover {
         background-color: #e0e0e0; /* Darker gray background for hover effect */
+      }
+
+      /* Style for the print button */
+      .print-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: #2d3c90; /* Color 1 background for button */
+        color: #fff; /* White text color for button */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: medium;
+      }
+
+      .print-button:hover {
+        background-color: #1f295d; /* Darker Color 1 background on hover */
       }
     </style>
   </head>
   <body>
     <h1>Lab Schedule</h1>
+
+    <!-- Print button -->
+    <button
+      class="print-button"
+      onclick="printSchedule()"
+    >
+      Print Schedule
+    </button>
+
     {% for group, solutions in schedule %}
     <h2>{{ group }}</h2>
     <table>
@@ -73,5 +107,11 @@
       </tbody>
     </table>
     {% endfor %}
+
+    <script>
+      function printSchedule() {
+        window.print(); // Call browser's print function
+      }
+    </script>
   </body>
 </html>
