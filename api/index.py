@@ -1,12 +1,27 @@
 from flask import Flask, render_template, request, send_file
 from constraint import Problem, AllDifferentConstraint
+import os
+import csv
 
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = '/tmp'
 
 
 class FeasibilityError(Exception):
     pass
+
+# Function to read data from CSV file
+def read_csv(file_path):
+    data = []
+    with open(file_path, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            # Splitting the course name and faculty name
+            row[4] = row[4].strip('"')  # Removing quotes from course name
+            row[5] = row[5].strip('"')  # Removing quotes from faculty name
+            data.append(row)
+    return data
 
 
 def solve_csp(group_data, labs):
@@ -76,12 +91,13 @@ def upload_file():
     if request.method == 'POST':
         file = request.files['file']
         if file:
+            # Save uploaded file to a temporary location
+            temp_file_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], file.filename)
+            file.save(temp_file_path)
+
             # Read CSV file
-            stream = file.stream
-            stream.seek(0)
-            csv_data = stream.read().decode("UTF-8").splitlines()
-            header = csv_data[0].split(",")
-            data = [row.split(",") for row in csv_data[1:]]
+            data = read_csv(temp_file_path)
 
             # Group data
             grouped_data = {}
