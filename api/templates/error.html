@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Error: USIU Lab Schedule Generator</title>
-  <style>
-    body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center; /* Center horizontally */
-      align-items: center; /* Center vertically */
-      height: 100vh; /* Full height of viewport */
-      background-color: #f8f9fa; /* Light gray background */
-      color: #333; /* Black text color */
-    }
-    .container {
-      max-width: 600px;
-      padding: 20px;
-      background-color: #fff; /* White background */
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #dc3545; /* Red color for error message */
-    }
-    p {
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-    .error-details {
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #f8d7da; /* Light red background for error details */
-      border-radius: 5px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Error</h1>
-    <p>An error occurred:</p>
-    <div class="error-details">
-      <p>{{ error_message }}</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Error: USIU Lab Schedule Generator</title>
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
+
+    <style>
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        height: 100vh; /* Full height of viewport */
+        background-color: #f8f9fa; /* Light gray background */
+        color: #333; /* Black text color */
+      }
+      .container {
+        max-width: 600px;
+        padding: 20px;
+        background-color: #fff; /* White background */
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #dc3545; /* Red color for error message */
+      }
+      p {
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+      .error-details {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f8d7da; /* Light red background for error details */
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Error</h1>
+      <p>An error occurred:</p>
+      <div class="error-details">
+        <p>{{ error_message }}</p>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
