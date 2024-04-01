@@ -12,6 +12,8 @@ class FeasibilityError(Exception):
     pass
 
 # Function to read data from CSV file
+
+
 def read_csv(file_path):
     data = []
     with open(file_path, 'r') as file:
@@ -22,6 +24,24 @@ def read_csv(file_path):
             row[5] = row[5].strip('"')  # Removing quotes from faculty name
             data.append(row)
     return data
+
+
+def group_data(data):
+    grouped_data = {}
+    for row in data:
+        key = f"{row[0]} {row[1]}"
+        if key not in grouped_data:
+            grouped_data[key] = []
+        grouped_data[key].append(row)
+    return grouped_data
+
+
+def check_feasibility(groups, labs):
+    for group, data in groups.items():
+        if len(data) > len(labs):
+            available_labs = ', '.join(labs)
+            raise FeasibilityError(
+                f"Error: Unable to generate lab schedule for group '{group}'. There are more classes scheduled than available labs ({available_labs}). Consider adding more lab resources or adjusting the schedule.")
 
 
 def solve_csp(group_data, labs):
@@ -41,14 +61,6 @@ def solve_csp(group_data, labs):
     solution = problem.getSolution()
 
     return solution
-
-
-def check_feasibility(groups, labs):
-    for group, data in groups.items():
-        if len(data) > len(labs):
-            available_labs = ', '.join(labs)
-            raise FeasibilityError(
-                f"Error: Unable to generate lab schedule for group '{group}'. There are more classes scheduled than available labs ({available_labs}). Consider adding more lab resources or adjusting the schedule.")
 
 
 def generate_lab_distribution(grouped_data, labs):
@@ -99,13 +111,8 @@ def upload_file():
             # Read CSV file
             data = read_csv(temp_file_path)
 
-            # Group data
-            grouped_data = {}
-            for row in data:
-                key = f"{row[0]} {row[1]}"
-                if key not in grouped_data:
-                    grouped_data[key] = []
-                grouped_data[key].append(row)
+            # Call the group_data function
+            grouped_data = group_data(data)
 
             # Solve CSP and print lab distribution
             labs = ['LAB1', 'LAB2', 'LAB3', 'LAB4',
