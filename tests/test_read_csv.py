@@ -1,6 +1,6 @@
 import pytest
 import os
-from app.index import read_csv
+from api.index import read_csv
 
 
 @pytest.fixture

@@ -18,7 +18,7 @@ def test_upload_csv(browser):
     browser.get("http://localhost:5000")
     file_input = browser.find_element(By.CSS_SELECTOR, "#file")
     file_input.send_keys(
-        "/home/murage/Documents/school/APT3010/project/flask-project/app/static/sample_schedule.csv")
+        "/home/murage/Documents/school/APT3010/project/flask-project/api/static/sample_schedule.csv")
 
     upload_button = browser.find_element(By.CSS_SELECTOR,
                                          "button[type='submit']")

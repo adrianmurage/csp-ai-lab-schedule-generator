@@ -1,5 +1,5 @@
 import pytest
-from app.index import check_feasibility, FeasibilityError
+from api.index import check_feasibility, FeasibilityError
 
 
 def test_feasibility_check_fails():

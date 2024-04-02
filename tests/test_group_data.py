@@ -2,7 +2,7 @@
 
 import pytest
 # Import the group_data function from your application code
-from app.index import group_data
+from api.index import group_data
 
 # Define test cases
 
