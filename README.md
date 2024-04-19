@@ -39,3 +39,6 @@ Generate Lab Schedule: The application processes the uploaded data to assign lab
 The tests can be found in the `/tests` directory. 
 Each file in the directory contains a separate set of tests that total to 9 tests that currently run successfully.
 
+Successfully running the tests looks like:
+
+![image](https://github.com/adrianmurage/csp-ai-lab-schedule-generator/assets/47227271/01db83d0-bd79-4c43-a957-76cc7cb33982)
