@@ -34,3 +34,8 @@ Generate Lab Schedule: The application processes the uploaded data to assign lab
 1. Optionally download the sample course schedule or generate your own copy following the advised CSV format.
 2. Upload the CSV file containing the course schedule data.
 3. View the generated lab schedule on the web interface.
+
+## Tests
+The tests can be found in the `/tests` directory. 
+Each file in the directory contains a separate set of tests that total to 9 tests that currently run successfully.
+
